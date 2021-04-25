@@ -7,6 +7,7 @@ namespace FixMath.NET
     /// <summary>
     /// Represents a 2-point vector using Q31.32 fixed-point numbers.
     /// </summary>
+    [Serializable]
     public struct Fix64Vec2 : IEquatable<Fix64Vec2>, IFormattable
     {
         private static int CombineHashCodes(int h1, int h2) => (h1 << 5) + h1 ^ h2;
@@ -20,8 +21,8 @@ namespace FixMath.NET
         public static Fix64Vec2 MinValue => new Fix64Vec2(Fix64.MinValue);
         public static Fix64Vec2 MaxValue => new Fix64Vec2(Fix64.MaxValue);
         
-        public readonly Fix64 X;
-        public readonly Fix64 Y;
+        public Fix64 X;
+        public Fix64 Y;
 
         public Fix64 SqrMagnitude => X * X + Y * Y;
         public Fix64 Magnitude => Fix64.Sqrt(SqrMagnitude);
