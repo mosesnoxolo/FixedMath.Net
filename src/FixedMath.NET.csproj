@@ -45,6 +45,7 @@
     <Compile Include="Fix64.cs" />
     <Compile Include="Fix64SinLut.cs" />
     <Compile Include="Fix64TanLut.cs" />
+    <Compile Include="Fix64Vec2.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

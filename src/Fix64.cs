@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.IO;
 using System.Runtime.CompilerServices;
 
@@ -8,7 +9,7 @@ namespace FixMath.NET
     /// <summary>
     /// Represents a Q31.32 fixed-point number.
     /// </summary>
-    public partial struct Fix64 : IEquatable<Fix64>, IComparable<Fix64>
+    public partial struct Fix64 : IEquatable<Fix64>, IComparable<Fix64>, IFormattable
     {
         readonly long m_rawValue;
 
@@ -26,6 +27,7 @@ namespace FixMath.NET
         public static readonly Fix64 PiTimes2 = new Fix64(PI_TIMES_2);
         public static readonly Fix64 PiInv = (Fix64)0.3183098861837906715377675267M;
         public static readonly Fix64 PiOver2Inv = (Fix64)0.6366197723675813430755350535M;
+        public static readonly Fix64 Epsilon = new Fix64(1L);
         static readonly Fix64 Log2Max = new Fix64(LOG2MAX);
         static readonly Fix64 Log2Min = new Fix64(LOG2MIN);
         static readonly Fix64 Ln2 = new Fix64(LN2);
@@ -974,7 +976,18 @@ namespace FixMath.NET
         public override string ToString()
         {
             // Up to 10 decimal places
-            return ((decimal)this).ToString("0.##########");
+            return ToString("0.##########", CultureInfo.CurrentCulture);
+        }
+        
+        public string ToString(string format)
+        {
+            // Up to 10 decimal places
+            return ToString(format, CultureInfo.CurrentCulture);
+        }
+        
+        public string ToString(string format, IFormatProvider formatProvider)
+        {
+            return ((decimal) this).ToString(format, formatProvider);
         }
 
         public static Fix64 FromRaw(long rawValue)
